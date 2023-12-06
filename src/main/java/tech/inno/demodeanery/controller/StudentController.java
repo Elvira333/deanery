@@ -1,9 +1,9 @@
-package com.example.demo.controller;
+package tech.inno.demodeanery.controller;
 
-import com.example.demo.pojo.CreateStudentRequest;
-import com.example.demo.pojo.StudentResponse;
-import com.example.demo.service.StudentService;
-import lombok.RequiredArgsConstructor;
+import tech.inno.demodeanery.controller.dto.CreateStudentRequest;
+import tech.inno.demodeanery.controller.dto.StudentResponse;
+import tech.inno.demodeanery.service.StudentService;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,7 +12,7 @@ import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 
 @RestController
 @RequestMapping("/api/v1/users")
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class StudentController {
     private StudentService studentService;
 

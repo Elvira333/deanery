@@ -1,6 +1,6 @@
-package com.example.demo.repository;
+package tech.inno.demodeanery.repository;
 
-import com.example.demo.repository.dao.Student;
+import tech.inno.demodeanery.repository.dao.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface StudentRepository extends JpaRepository<Student, Long> {

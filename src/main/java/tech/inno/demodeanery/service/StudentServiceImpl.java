@@ -1,16 +1,15 @@
-package com.example.demo.service;
+package tech.inno.demodeanery.service;
 
-import com.example.demo.pojo.CreateStudentRequest;
-import com.example.demo.pojo.CreateSubjectRequest;
-import com.example.demo.pojo.StudentResponse;
-import com.example.demo.pojo.SubjectResponse;
-import com.example.demo.repository.StudentRepository;
-import com.example.demo.repository.dao.Student;
-import com.example.demo.repository.dao.Subject;
+import tech.inno.demodeanery.controller.dto.CreateStudentRequest;
+import tech.inno.demodeanery.controller.dto.CreateSubjectRequest;
+import tech.inno.demodeanery.controller.dto.StudentResponse;
+import tech.inno.demodeanery.controller.dto.SubjectResponse;
+import tech.inno.demodeanery.repository.StudentRepository;
+import tech.inno.demodeanery.repository.dao.Student;
+import tech.inno.demodeanery.repository.dao.Subject;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

@@ -1,4 +1,4 @@
-package com.example.demo.pojo;
+package tech.inno.demodeanery.controller.dto;
 
 import lombok.Data;
 import lombok.experimental.Accessors;

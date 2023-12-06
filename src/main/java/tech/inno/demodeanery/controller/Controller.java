@@ -1,4 +1,4 @@
-package com.example.demo.controller;
+package tech.inno.demodeanery.controller;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;

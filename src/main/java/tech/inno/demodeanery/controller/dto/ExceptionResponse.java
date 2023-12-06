@@ -1,4 +1,4 @@
-package com.example.demo.exception;
+package tech.inno.demodeanery.controller.dto;
 
 import lombok.Data;
 

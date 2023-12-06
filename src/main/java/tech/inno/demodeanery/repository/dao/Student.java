@@ -1,4 +1,4 @@
-package com.example.demo.repository.dao;
+package tech.inno.demodeanery.repository.dao;
 
 import jakarta.persistence.*;
 import lombok.Getter;

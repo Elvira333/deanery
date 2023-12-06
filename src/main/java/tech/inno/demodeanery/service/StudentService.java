@@ -1,7 +1,7 @@
-package com.example.demo.service;
+package tech.inno.demodeanery.service;
 
-import com.example.demo.pojo.CreateStudentRequest;
-import com.example.demo.pojo.StudentResponse;
+import tech.inno.demodeanery.controller.dto.CreateStudentRequest;
+import tech.inno.demodeanery.controller.dto.StudentResponse;
 import org.antlr.v4.runtime.misc.NotNull;
 
 import java.util.List;

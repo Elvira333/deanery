@@ -1,6 +1,6 @@
-package com.example.demo.controller;
+package tech.inno.demodeanery.controller;
 
-import com.example.demo.exception.ExceptionResponse;
+import tech.inno.demodeanery.controller.dto.ExceptionResponse;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
