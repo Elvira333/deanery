@@ -5,12 +5,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class Controller {
+public class DefaultController {
     @Value("deanery")
     private String name;
 
     @GetMapping
     public String getNameApplication() {
-        return name;
+        return "Вас приветствует проект: " + name;
     }
 }

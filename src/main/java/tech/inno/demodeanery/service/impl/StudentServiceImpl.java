@@ -1,5 +1,7 @@
-package tech.inno.demodeanery.service;
+package tech.inno.demodeanery.service.impl;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import tech.inno.demodeanery.controller.dto.CreateStudentRequest;
 import tech.inno.demodeanery.controller.dto.CreateSubjectRequest;
 import tech.inno.demodeanery.controller.dto.StudentResponse;
@@ -8,10 +10,10 @@ import tech.inno.demodeanery.repository.StudentRepository;
 import tech.inno.demodeanery.repository.dao.Student;
 import tech.inno.demodeanery.repository.dao.Subject;
 import jakarta.persistence.EntityNotFoundException;
-import lombok.AllArgsConstructor;
 import lombok.NonNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import tech.inno.demodeanery.service.StudentService;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -22,13 +24,15 @@ import java.util.stream.Collectors;
 import static java.util.Optional.ofNullable;
 
 @Service
-@AllArgsConstructor
-public class StudentServiceImpl implements StudentService{
+@Slf4j
+@RequiredArgsConstructor
+public class StudentServiceImpl implements StudentService {
     private final StudentRepository studentRepository;
 
     @Override
     @Transactional(readOnly = true)
-    public List<StudentResponse> findAll() {
+    public @NonNull List<StudentResponse> findAll() {
+        log.info("Список всех студентов");
         return studentRepository.findAll()
                 .stream()
                 .map(this::buildStudentResponse)
@@ -37,43 +41,45 @@ public class StudentServiceImpl implements StudentService{
 
     @Override
     @Transactional(readOnly = true)
-    public StudentResponse findById(Long studentId) {
+    public StudentResponse findById(@NonNull Long studentId) {
+        log.info("Данные студента под ID: " + studentId);
         return studentRepository.findById(studentId)
                 .map(this::buildStudentResponse)
-                .orElseThrow(() -> new EntityNotFoundException("User " + studentId + " is not found"));
+                .orElseThrow(() -> new EntityNotFoundException("Cтудент  " + studentId + " не найден"));
     }
 
     @Override
     @Transactional
-    public StudentResponse createUser(CreateStudentRequest request) {
+    public @NonNull StudentResponse createStudent(@NonNull CreateStudentRequest request) {
+        log.info("Студент успешно создан");
         Student student = buildStudentRequest(request);
         return buildStudentResponse(studentRepository.save(student));
     }
 
     @Override
     @Transactional
-    public StudentResponse update(Long studentId, CreateStudentRequest request) {
+    public @NonNull StudentResponse update(@NonNull Long studentId, @NonNull CreateStudentRequest request) {
+        log.info("Данные студента обновлены под ID: " + studentId);
         Student student = studentRepository.findById(studentId)
-                .orElseThrow(() -> new EntityNotFoundException("User " + studentId + " is not found"));
+                .orElseThrow(() -> new EntityNotFoundException("Студент " + studentId + " не найден"));
         studentUpdate(student, request);
         return buildStudentResponse(studentRepository.save(student));
     }
 
     @Override
     @Transactional
-    public void delete(Long studentId) {
+    public void delete(@NonNull Long studentId) {
+        log.info("Студент удален под id: " + studentId);
         studentRepository.deleteById(studentId);
     }
 
     @NonNull
-    private StudentResponse buildStudentResponse( Student student) {
+    private StudentResponse buildStudentResponse(Student student) {
         return new StudentResponse()
-                .setId(student.getId())
                 .setLogin(student.getLogin())
                 .setAge(student.getAge())
-                .setFirstName(student.getFirstName())
-                .setMiddleName(student.getMiddleName())
-                .setLastName(student.getLastName())
+                .setName(student.getName())
+                .setSurname(student.getSurname())
                 .setSubjectResponses(buildSubjectResponses(student.getSubjects()));
     }
 
@@ -91,7 +97,7 @@ public class StudentServiceImpl implements StudentService{
         return subjectResponses;
     }
     @NonNull
-    private Student buildStudentRequest( CreateStudentRequest request) {
+    private Student buildStudentRequest(CreateStudentRequest request) {
         Set<Subject> subjects = new HashSet<>();
         if (request.getSubject() != null) {
             subjects.add(new Subject().setName(request.getSubject().getName()));
@@ -100,18 +106,15 @@ public class StudentServiceImpl implements StudentService{
         return new Student()
                 .setLogin(request.getLogin())
                 .setAge(request.getAge())
-                .setFirstName(request.getFirstName())
-                .setMiddleName(request.getMiddleName())
-                .setLastName(request.getLastName())
+                .setName(request.getName())
+                .setSurname(request.getSurname())
                 .setSubjects(subjects);
     }
 
-    @NonNull
     private void studentUpdate(Student student, CreateStudentRequest request) {
         ofNullable(request.getLogin()).map(student::setLogin);
-        ofNullable(request.getFirstName()).map(student::setFirstName);
-        ofNullable(request.getMiddleName()).map(student::setMiddleName);
-        ofNullable(request.getLastName()).map(student::setLastName);
+        ofNullable(request.getName()).map(student::setName);
+        ofNullable(request.getSurname()).map(student::setSurname);
         ofNullable(request.getAge()).map(student::setAge);
 
         CreateSubjectRequest subjectRequest = request.getSubject();

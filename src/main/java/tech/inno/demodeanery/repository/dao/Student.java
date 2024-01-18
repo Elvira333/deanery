@@ -1,17 +1,20 @@
 package tech.inno.demodeanery.repository.dao;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.Accessors;
 
 
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 @Accessors(chain = true)
 @Entity
 @Table(name = "students")
@@ -24,14 +27,11 @@ public class Student {
     @Column(name = "login",nullable = false, unique = true)
     private String login;
 
-    @Column(name = "firstName")
-    private String firstName;
+    @Column(name = "name")
+    private String name;
 
-    @Column(name = "middleName")
-    private String middleName;
-
-    @Column(name = "lastName")
-    private String lastName;
+    @Column(name = "surname")
+    private String surname;
 
     @Column(name = "age")
     private Integer age;
@@ -44,6 +44,13 @@ public class Student {
     )
     private Set<Subject> subjects = new HashSet<>();
 
+    public void addSubject(Subject subject) {
+        subjects.add(subject);
+    }
+
+    public void removeSubject(Long subjectId) {
+        subjects = subjects.stream().filter(o -> !o.getId().equals(subjectId)).collect(Collectors.toSet());
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -57,15 +64,4 @@ public class Student {
         return Objects.hash(login);
     }
 
-    @Override
-    public String toString() {
-        return "Student{" +
-                "id=" + id +
-                ", login='" + login + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", middleName='" + middleName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", age=" + age +
-                '}';
-    }
 }

@@ -9,11 +9,9 @@ import java.util.Set;
 @Data
 @Accessors(chain = true)
 public class StudentResponse {
-    private Long id;
     private String login;
-    private String firstName;
-    private String middleName;
-    private String lastName;
+    private String name;
+    private String surname;
     private Integer age;
     private SubjectResponse subject;
     private Set<SubjectResponse> subjectResponses;
@@ -23,5 +21,4 @@ public class StudentResponse {
         this.subjectResponses = subjectResponses;
         return this;
     }
-
 }

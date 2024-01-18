@@ -1,14 +1,18 @@
 package tech.inno.demodeanery.repository.dao;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.Accessors;
+import tech.inno.demodeanery.controller.dto.StudentResponse;
+import tech.inno.demodeanery.controller.dto.SubjectResponse;
 
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 @Getter
 @Setter
 @Accessors(chain = true)
@@ -44,11 +48,20 @@ public class Subject {
         return Objects.hash(name);
     }
 
-    @Override
-    public String toString() {
-        return "Subject{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
+    public void setStudents(Set<StudentResponse> studentResponses) {
+        Set<Student> students = new HashSet<>();
+
+        for (StudentResponse studentResponse : studentResponses) {
+            Student student = new Student();
+            student.setLogin(studentResponse.getLogin());
+            student.setName(studentResponse.getName());
+            student.setSurname(studentResponse.getSurname());
+            student.setAge(studentResponse.getAge());
+
+            students.add(student);
+        }
+
+        this.students = students;
+
     }
 }

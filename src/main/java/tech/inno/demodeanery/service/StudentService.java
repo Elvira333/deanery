@@ -1,24 +1,24 @@
 package tech.inno.demodeanery.service;
 
+import lombok.NonNull;
 import tech.inno.demodeanery.controller.dto.CreateStudentRequest;
 import tech.inno.demodeanery.controller.dto.StudentResponse;
-import org.antlr.v4.runtime.misc.NotNull;
+
 
 import java.util.List;
 
 public interface StudentService {
 
-    @NotNull
+    @NonNull
     List<StudentResponse> findAll();
 
-    @NotNull
-    StudentResponse findById(@NotNull Long studentId);
+    StudentResponse findById(@NonNull Long studentId);
 
-    @NotNull
-    StudentResponse createUser(@NotNull CreateStudentRequest request);
+    @NonNull
+    StudentResponse createStudent(@NonNull CreateStudentRequest request);
 
-    @NotNull
-    StudentResponse update(@NotNull Long studentId, @NotNull CreateStudentRequest request);
+    @NonNull
+    StudentResponse update(@NonNull Long studentId, @NonNull CreateStudentRequest request);
 
-    void delete(@NotNull Long studentId);
+    void delete(@NonNull Long studentId);
 }
