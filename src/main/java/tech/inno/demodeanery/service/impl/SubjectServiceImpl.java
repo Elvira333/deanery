@@ -3,6 +3,7 @@ package tech.inno.demodeanery.service.impl;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import tech.inno.demodeanery.controller.dto.CreateSubjectRequest;
 import tech.inno.demodeanery.controller.dto.StudentResponse;
@@ -17,6 +18,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class SubjectServiceImpl implements SubjectService {
@@ -26,6 +28,7 @@ public class SubjectServiceImpl implements SubjectService {
 
     @Override
     public List<Subject> findAll() {
+        log.info("Найдены все предметы");
         return subjectRepository.findAll();
     }
 
@@ -97,6 +100,7 @@ public class SubjectServiceImpl implements SubjectService {
 
     private StudentResponse mapStudentToStudentResponse(StudentResponse student) {
         StudentResponse studentResponse = new StudentResponse();
+        studentResponse.setId(student.getId());
         studentResponse.setLogin(student.getLogin());
         studentResponse.setName(student.getName());
         studentResponse.setSurname(student.getSurname());

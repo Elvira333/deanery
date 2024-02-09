@@ -27,13 +27,13 @@ public class Student {
     @Column(name = "login",nullable = false, unique = true)
     private String login;
 
-    @Column(name = "name")
+
     private String name;
 
-    @Column(name = "surname")
+
     private String surname;
 
-    @Column(name = "age")
+
     private Integer age;
 
     @ManyToMany

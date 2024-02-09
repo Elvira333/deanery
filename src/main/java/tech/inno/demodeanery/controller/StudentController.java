@@ -15,7 +15,7 @@ import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 @RequestMapping("/students")
 @AllArgsConstructor
 public class StudentController {
-    private StudentService studentService;
+    private final StudentService studentService;
 
     @GetMapping(produces = APPLICATION_JSON_VALUE)
     public List<StudentResponse> findAll() {

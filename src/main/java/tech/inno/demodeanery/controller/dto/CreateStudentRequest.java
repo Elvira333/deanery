@@ -1,11 +1,15 @@
 package tech.inno.demodeanery.controller.dto;
 
-import lombok.Data;
+import lombok.*;
 import lombok.experimental.Accessors;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Accessors(chain = true)
 public class CreateStudentRequest {
+    private Long id;
     private String login;
     private String name;
     private String surname;

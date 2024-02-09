@@ -1,6 +1,6 @@
 package tech.inno.demodeanery.controller;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import tech.inno.demodeanery.controller.dto.CreateSubjectRequest;
 import tech.inno.demodeanery.controller.dto.SubjectResponse;
@@ -13,9 +13,9 @@ import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 
 @RestController
 @RequestMapping("/subject")
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class SubjectController {
-    private SubjectService subjectService;
+    private final SubjectService subjectService;
 
     @GetMapping(produces = APPLICATION_JSON_VALUE)
     public List<Subject> findAll() {

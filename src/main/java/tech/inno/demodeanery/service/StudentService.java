@@ -1,6 +1,8 @@
 package tech.inno.demodeanery.service;
 
 import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import tech.inno.demodeanery.controller.dto.CreateStudentRequest;
 import tech.inno.demodeanery.controller.dto.StudentResponse;
 
